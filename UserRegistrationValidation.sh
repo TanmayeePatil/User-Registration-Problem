@@ -130,11 +130,11 @@ function CheckPassword
 }
 
 #Taking Input from user
-#read -p "Enter User First Name:" fname
-#read -p "Enter User Last Name:" lname
+read -p "Enter User First Name:" fname
+read -p "Enter User Last Name:" lname
 read -p "Enter User Email Id:" emailId
-#read -p "Enter User Mobile No:" mobNumber
-#read -p "Enter User Password:" passwordString
+read -p "Enter User Mobile No:" mobNumber
+read -p "Enter User Password:" passwordString
 
 echo ""
 
