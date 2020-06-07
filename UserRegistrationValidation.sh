@@ -6,6 +6,7 @@ echo -e "WELCOME TO USER REGISTRATION VALIDATION PROBLEM\n\n"
 #########REQUIRED VARIABLES##############
 namePattern="[[:upper:]][a-zA-Z]{2,}$"
 emailPattern="^(abc)([a-zA-Z0-9\_\-\.\+]*)@(bl)\.(co)\.*([a-zA-Z]{2})*"
+mobilePattern="^(91)([[:space:]]{1})([0-9]{10})$"
 
 ###########FUNCTIONS################
 function CheckNameFirstLetter
@@ -49,7 +50,7 @@ function CheckEmail
  emailUser=$1
 
  if [[ $emailUser =~ $emailPattern ]];then
-    echo "Valid Email Id."
+    echo "Valid Email Id"
  else
     echo "Invalid Email Id"
     echo "Execution Terminated ... Try again"
@@ -57,11 +58,24 @@ function CheckEmail
  fi
 }
 
+function CheckMobile
+{
+ mobUser="$1"
+ if [[ $mobUser =~ $mobilePattern ]];then
+    echo "Valid Mobile Number"
+ else
+    echo "Invalid mobile number"
+    echo "Execution Terminated ... Try again"
+    exit 0
+ fi
+}
 
 #Taking Input from user
-read -p "Enter User First Name: " fname
-read -p "Enter User Last Name: " lname
+read -p "Enter User First Name:" fname
+read -p "Enter User Last Name:" lname
 read -p "Enter User Email Id:" emailId
+read -p "Enter User Mobile No:" mobNumber
+
 
 #Checking user first name of User
 CheckName $fname
@@ -74,10 +88,15 @@ lname=$nameUser
 #Checking user's email id
 CheckEmail $emailId
 
+#Checking user's mobile number
+CheckMobile "$mobNumber"
+
 echo -e "\n\n---------------------------------------------"
 echo "USER INFORMATION"
 echo "---------------------------------------------"
 echo "First Name: $fname"
 echo "Last Name: $lname"
 echo "Email Id: $emailId"
+echo "Mobile Number: $mobNumber"
 echo "---------------------------------------------"
+
