@@ -139,29 +139,29 @@ read -p "Enter User Email Id:" emailId
 echo ""
 
 #Checking user first name of User
-#CheckName $fname
-#fname=$nameUser
+CheckName $fname
+fname=$nameUser
 
 #Checking user lst name of User
-#CheckName $lname
-#lname=$nameUser
+CheckName $lname
+lname=$nameUser
 
 #Checking user's email id
 CheckEmail $emailId
 
 #Checking user's mobile number
-#CheckMobile "$mobNumber"
+CheckMobile "$mobNumber"
 
 #Checking user's password
-#CheckPassword $passwordString
+CheckPassword $passwordString
 
 echo -e "\n\n---------------------------------------------"
 echo "USER INFORMATION"
 echo "---------------------------------------------"
-#echo "First Name: $fname"
-#echo "Last Name: $lname"
+echo "First Name: $fname"
+echo "Last Name: $lname"
 echo "Email Id: $emailId"
-#echo "Mobile Number: $mobNumber"
-#echo "Password: $passwordString"
+echo "Mobile Number: $mobNumber"
+echo "Password: $passwordString"
 echo "---------------------------------------------"
 
