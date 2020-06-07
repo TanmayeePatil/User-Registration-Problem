@@ -76,7 +76,14 @@ function CheckPassword
   len="${#passUser}"
 
   if [ $len -ge 8 ]; then
-    echo "Valid Password"
+       pass=`echo "$passUser" | grep [A-Z]`
+    if [ ! -z "$pass" ]; then
+      echo "Valid Password"
+    else
+      echo "Password is weak ... Include Upper case character"
+      echo "Execution Terminated ... Try again"
+      exit 0
+    fi
   else
     echo "password lenght should be greater than or equal 8 hence weak password"
     echo "Execution Terminated ... Try again"
@@ -90,6 +97,8 @@ read -p "Enter User Last Name:" lname
 read -p "Enter User Email Id:" emailId
 read -p "Enter User Mobile No:" mobNumber
 read -p "Enter User Password:" passwordString
+
+echo ""
 
 #Checking user first name of User
 CheckName $fname
