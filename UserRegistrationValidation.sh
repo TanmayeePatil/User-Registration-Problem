@@ -70,12 +70,26 @@ function CheckMobile
  fi
 }
 
+function CheckPassword
+{
+  passUser="$1"
+  len="${#passUser}"
+
+  if [ $len -ge 8 ]; then
+    echo "Valid Password"
+  else
+    echo "password lenght should be greater than or equal 8 hence weak password"
+    echo "Execution Terminated ... Try again"
+    exit 0
+  fi
+}
+
 #Taking Input from user
 read -p "Enter User First Name:" fname
 read -p "Enter User Last Name:" lname
 read -p "Enter User Email Id:" emailId
 read -p "Enter User Mobile No:" mobNumber
-
+read -p "Enter User Password:" passwordString
 
 #Checking user first name of User
 CheckName $fname
@@ -91,6 +105,9 @@ CheckEmail $emailId
 #Checking user's mobile number
 CheckMobile "$mobNumber"
 
+#Checking user's password
+CheckPassword $passwordString
+
 echo -e "\n\n---------------------------------------------"
 echo "USER INFORMATION"
 echo "---------------------------------------------"
@@ -98,5 +115,6 @@ echo "First Name: $fname"
 echo "Last Name: $lname"
 echo "Email Id: $emailId"
 echo "Mobile Number: $mobNumber"
+echo "Password: $passwordString"
 echo "---------------------------------------------"
 
