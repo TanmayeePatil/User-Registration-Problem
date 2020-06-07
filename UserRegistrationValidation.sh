@@ -76,9 +76,17 @@ function CheckPassword
   len="${#passUser}"
 
   if [ $len -ge 8 ]; then
-       pass=`echo "$passUser" | grep [A-Z]`
-    if [ ! -z "$pass" ]; then
+       passUpper=`echo "$passUser" | grep [A-Z]`
+    if [ ! -z "$passUpper" ]; then
       echo "Valid Password"
+       passNum=`echo "$passUser" | grep [0-9]`
+      if [ ! -z "$passNum" ];then
+         echo "Valid Password"
+      else
+         echo "Password is weak ... Include Upper case character"
+         echo "Execution Terminated ... Try again"
+         exit 0
+      fi
     else
       echo "Password is weak ... Include Upper case character"
       echo "Execution Terminated ... Try again"
