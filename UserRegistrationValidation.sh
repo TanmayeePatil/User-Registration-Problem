@@ -74,23 +74,53 @@ function CheckPassword
 {
   passUser="$1"
   len="${#passUser}"
+  count=0
 
   if [ $len -ge 8 ]; then
+       echo "CHECKED: Password length is 8 or more then "
+       #checking upper character in password
        passUpper=`echo "$passUser" | grep [A-Z]`
     if [ ! -z "$passUpper" ]; then
-      echo "Valid Password"
+       echo "CHECKED: Password have at least one upper case character"
+       #checking number in password
        passNum=`echo "$passUser" | grep [0-9]`
-      if [ ! -z "$passNum" ];then
-         echo "Valid Password"
-      else
-         echo "Password is weak ... Include Upper case character"
+       if [ ! -z "$passNum" ];then
+          echo "CHECKED: Password have at least one numeric character"
+
+          #checking 1 special character in password
+          passSpecial=`echo "$passUser" | grep [,\@\.\!\#\$\%\^\&\*\-]`
+
+          #counting special characters
+          passSpecialCount=`echo $passSpecial | sed -e 's/\(.\)/\n/g' | grep [,\@\.\!\#\$\%\^\&\*\-] | wc -l `
+          if [ ! -z "$passSpecial" ];then
+             echo "$passSpecial" > PassFile.txt
+             while IFS= read -r -n1 char
+             do
+                  check=`echo $char | grep [,\@\.\!\#\$\%\^\&\*\-]`
+                  if [ ! -z $check ];then
+                     ((count++))
+                      check=""
+                  fi
+             done < "PassFile.txt"
+           if [ $count -eq 1 ];then
+             echo "Valid Password"
+           else
+             echo "password have more than one special character"
+             echo "Execution Terminated ... Try again"
+             exit 0
+	   fi
+         else
+             echo "Password is weak ... Include exact one special character in password"
+             echo "Execution Terminated ... Try again"
+             exit 0
+         fi
+       else
+         echo "Password is weak ... Include Numbers in password"
          echo "Execution Terminated ... Try again"
-         exit 0
-      fi
+       fi
     else
-      echo "Password is weak ... Include Upper case character"
+      echo "Password is weak ... Include Upper case character in password"
       echo "Execution Terminated ... Try again"
-      exit 0
     fi
   else
     echo "password lenght should be greater than or equal 8 hence weak password"
@@ -109,18 +139,18 @@ read -p "Enter User Password:" passwordString
 echo ""
 
 #Checking user first name of User
-CheckName $fname
-fname=$nameUser
+#CheckName $fname
+#fname=$nameUser
 
 #Checking user lst name of User
-CheckName $lname
-lname=$nameUser
+#CheckName $lname
+#lname=$nameUser
 
 #Checking user's email id
-CheckEmail $emailId
+#CheckEmail $emailId
 
 #Checking user's mobile number
-CheckMobile "$mobNumber"
+#CheckMobile "$mobNumber"
 
 #Checking user's password
 CheckPassword $passwordString
