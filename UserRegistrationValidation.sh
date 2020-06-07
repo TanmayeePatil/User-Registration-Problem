@@ -5,7 +5,7 @@ echo -e "WELCOME TO USER REGISTRATION VALIDATION PROBLEM\n\n"
 
 #########REQUIRED VARIABLES##############
 namePattern="[[:upper:]][a-zA-Z]{2,}$"
-emailPattern="^(abc)([a-zA-Z0-9\_\-\.\+]*)@(bl)\.(co)\.*([a-zA-Z]{2})*"
+emailPattern="^(abc)([a-zA-Z0-9\_\-\.\+-]*)([a-zA-Z0-9]*)@([a-zA-Z0-9]*)\.([a-zA-Z]*)\.*([a-zA-Z]{2})*"
 mobilePattern="^(91)([[:space:]]{1})([0-9]{10})$"
 
 ###########FUNCTIONS################
@@ -130,11 +130,11 @@ function CheckPassword
 }
 
 #Taking Input from user
-read -p "Enter User First Name:" fname
-read -p "Enter User Last Name:" lname
+#read -p "Enter User First Name:" fname
+#read -p "Enter User Last Name:" lname
 read -p "Enter User Email Id:" emailId
-read -p "Enter User Mobile No:" mobNumber
-read -p "Enter User Password:" passwordString
+#read -p "Enter User Mobile No:" mobNumber
+#read -p "Enter User Password:" passwordString
 
 echo ""
 
@@ -147,21 +147,21 @@ echo ""
 #lname=$nameUser
 
 #Checking user's email id
-#CheckEmail $emailId
+CheckEmail $emailId
 
 #Checking user's mobile number
 #CheckMobile "$mobNumber"
 
 #Checking user's password
-CheckPassword $passwordString
+#CheckPassword $passwordString
 
 echo -e "\n\n---------------------------------------------"
 echo "USER INFORMATION"
 echo "---------------------------------------------"
-echo "First Name: $fname"
-echo "Last Name: $lname"
+#echo "First Name: $fname"
+#echo "Last Name: $lname"
 echo "Email Id: $emailId"
-echo "Mobile Number: $mobNumber"
-echo "Password: $passwordString"
+#echo "Mobile Number: $mobNumber"
+#echo "Password: $passwordString"
 echo "---------------------------------------------"
 
